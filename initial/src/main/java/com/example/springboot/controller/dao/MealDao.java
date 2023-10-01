@@ -10,4 +10,6 @@ import java.util.List;
 public interface MealDao extends JpaRepository<Meal, Long> {
     List<Meal> findByName(String name);
     List<Meal> findByPriceGreaterThan(double price);
+    List<Meal> findByWinterMeal(boolean isWinterMeal);
+
 }

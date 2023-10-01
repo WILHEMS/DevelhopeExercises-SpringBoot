@@ -3,8 +3,10 @@ package com.example.springboot.service;
 import com.example.springboot.Meal;
 import com.example.springboot.component.RestaurantConfig;
 import com.example.springboot.controller.dao.MealDao;
+import com.mashape.unirest.http.Unirest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
@@ -14,13 +16,15 @@ public class MealService {
     private MealDao mealDao;
     private RestaurantConfig restaurantConfig;
 
+    private Double MIN_WINTER_TEMP = 2.0;
+
     @Autowired
     public MealService(MealDao mealDao, RestaurantConfig restaurantConfig) {
         this.mealDao = mealDao;
         this.restaurantConfig = restaurantConfig;
     }
     public void insertMealTest(){
-        mealDao.save(new Meal("Test Meal", "Very tasty", 4.88,true));
+        mealDao.save(new Meal("Test Meal", "Very tasty", 4.88,true,true));
     }
     public void deleteMealTest(long id){
         mealDao.deleteById(id);
@@ -38,7 +42,11 @@ public class MealService {
         mealDao.findByName("Chicken").forEach(System.out::println);
         System.out.println();
     }
-//
+    public  List<Meal> getWinterMeals(){
+
+        return mealDao.findByWinterMeal(true);
+    }
+
 //    public void addMeal(Meal meal) {
 //        if (meal == null) throw new IllegalArgumentException("Meal cannot be null!");
 //        mealDao.addMeal(meal);

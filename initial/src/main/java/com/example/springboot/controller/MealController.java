@@ -43,7 +43,7 @@ public class MealController {
 	}
 	@PostMapping("/meal-many-to-one")
 	public ResponseEntity<Meal> mealManyToOne(){
-		Meal meal = new Meal("Chicken", "Soup", 100.0, true);
+		Meal meal = new Meal("Chicken", "Soup", 100.0, true, true);
 		Ingredient ingredient = new Ingredient("Dumpling", true,true,false,true);
 		ingredient.setMeal(meal);
 		meal.setIngredients(Arrays.asList(ingredient));
